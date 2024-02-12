@@ -16,22 +16,27 @@
 //        Y = y;
 //        Z = z;
 //    }
-
+//    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+//    public static Point operator -(Point left, Point right)
+//    {
+//        return new Point(
+//            left.X - right.X,
+//            left.Y - right.Y,
+//            left.Z - right.Z
+//        );
+//    }
+//    [MethodImpl(MethodImplOptions.AggressiveInlining)]
 //    public static double Distance(Point value1, Point value2)
 //    {
-//        Vector128<double> vector128A = Vector128.Create(value1.X, value1.Y);
-//        Vector64<double> vector64A = Vector64.Create(value1.Z);
-//        Vector128<double> vector128B = Vector128.Create(value2.X, value2.Y);
-//        Vector64<double> vector64B = Vector64.Create(value2.Z);
-//        var v1 = vector128A - vector128B;
-//        var v2 = vector64A - vector64B;
-//        return Math.Sqrt(Vector128.Dot(v1, v1) + Vector64.Dot(v2, v2));
+//        var v = value1 - value2;
+//        Vector256<double> vector256 = Vector256.Create(v.X,v.Y,v.Z, 1);
+//        return Vector256.Dot(vector256, vector256);
 //    }
 //}
 //public unsafe static class MaxMin
 //{
 
-
+//    [MethodImpl(MethodImplOptions.AggressiveInlining)]
 //    public static double CalMaxMin(Point[] path1, Point[] path2)
 //    {
 //        var max = 0.0;
@@ -52,7 +57,7 @@
 //        }
 //        return max;
 //    }
-
+//    [MethodImpl(MethodImplOptions.AggressiveInlining)]
 //    public static double HausdorffDistance(Point[] path1, Point[] path2)
 //    {
 //        return Math.Max(CalMaxMin(path1, path2), CalMaxMin(path2, path1));

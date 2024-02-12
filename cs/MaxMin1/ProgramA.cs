@@ -1,6 +1,10 @@
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+
 public readonly struct Point
 {
     public readonly double X;
@@ -39,37 +43,60 @@ public unsafe static class MaxMin
     public static double CalMaxMin(Point[] path1, Point[] path2)
     {
         var max = 0.0D;
-        //foreach (var p1 in path1)
-        //{
-        //    var min = double.MaxValue;
-        //    foreach (var p2 in path2)
-        //    {
-        //        min = Math.Min(min, Point.Distance(p1, p2));
-        //    }
-        //    max = Math.Max(max, min);
-        //}
-        fixed (Point* pt1 = path1)
+        foreach (var p1 in path1)
         {
-            fixed (Point* pt2 = path2)
+            var min = double.MaxValue;
+            foreach (var p2 in path2)
             {
-                for (int i = 0; i < path1.Length; i++)
+                var dis = Point.Distance(p1, p2);
+                if (dis < min)
                 {
-                    var min = double.MaxValue;
-                    for (int j = 0; j < path2.Length; j++)
-                    {
-                        min = Math.Min(min, Point.Distance(*(pt1 + i), *(pt2 + j)));
-                    }
-                    max = Math.Max(max, min);
+                    min = dis;
                 }
+
+            }
+            if (min > max)
+            {
+                max = min;
             }
         }
+        //fixed (Point* pt1 = path1)
+        //{
+        //    fixed (Point* pt2 = path2)
+        //    {
+        //        for (int i = 0; i < path1.Length; i++)
+        //        {
+        //            var min = double.MaxValue;
+        //            for (int j = 0; j < path2.Length; j++)
+        //            {
+        //                var dis = Point.Distance(*(pt1 + i), *(pt2 + j));
+        //                if (dis < min)
+        //                {
+        //                    min = dis;
+        //                }
+        //            }
+        //            if (min > max)
+        //            {
+        //                max = min;
+        //            }
+        //        }
+        //    }
+        //}
         return max;
     }
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static double HausdorffDistance(Point[] path1, Point[] path2)
     {
-
-        return Math.Max(CalMaxMin(path1, path2), CalMaxMin(path2, path1));
+        var r1 = CalMaxMin(path1, path2);
+        var r2 = CalMaxMin(path2, path1);
+        if (r1 < r2)
+        {
+            return r2;
+        }
+        else
+        {
+            return r1;
+        }
     }
 
     public static void Main(string[] args)

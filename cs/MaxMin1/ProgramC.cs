@@ -1,9 +1,10 @@
-﻿//using Newtonsoft.Json;
-//using System.Diagnostics;
+﻿//using System.Diagnostics;
+//using System.Runtime.CompilerServices;
+//using Newtonsoft.Json;
 
 //public readonly record struct Point(double X, double Y, double Z)
 //{
-
+//    [MethodImpl(MethodImplOptions.AggressiveInlining)]
 //    public double Dis(Point other)
 //    {
 //        var (x1, y1, z1) = this;
@@ -26,7 +27,8 @@
 //            var min = double.MaxValue;
 //            foreach (var p2 in path2)
 //            {
-//                min = Math.Min(min, p1.Dis(p2));
+//                var dis = p1.Dis(p2);
+//                min = Math.Min(min,dis);
 //            }
 //            max = Math.Max(max, min);
 //        }
@@ -61,7 +63,6 @@
 
 //        var stopWatch = Stopwatch.StartNew();
 //        var res = HausdorffDistance(path1, path2);
-//        stopWatch.Stop();
 //        Console.WriteLine($"res is {res}");
 //        Console.WriteLine($"spend time is {stopWatch.ElapsedMilliseconds} ms");
 //    }
