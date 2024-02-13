@@ -28,7 +28,7 @@
 //            foreach (var p2 in path2)
 //            {
 //                var dis = p1.Dis(p2);
-//                min = Math.Min(min,dis);
+//                min = Math.Min(min, dis);
 //            }
 //            max = Math.Max(max, min);
 //        }
