@@ -5,7 +5,7 @@ const path = require('path');
 async function main() {
   
   let p=[{x:0,y:0,z:0}];
-  for(let i = 0; i < 100000; i++) {
+  for(let i = 0; i < 40000; i++) {
     let {x,y,z}=p[i];
     p.push({x:x+(Math.random()/100),y:y+(Math.random()/100),z:z+(Math.random()/100)});
   }

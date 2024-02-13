@@ -53,11 +53,11 @@ func HausdorffDistance(path1, path2 []Point) float64 {
 
 func main() {
 	// Read the JSON files and deserialize into slices of Points.
-	p1Bytes, err := ioutil.ReadFile("../path.json")
+	p1Bytes, err := ioutil.ReadFile("../path1.json")
 	if err != nil {
 		panic(err)
 	}
-	p2Bytes, err := ioutil.ReadFile("../path1.json")
+	p2Bytes, err := ioutil.ReadFile("../path2.json")
 	if err != nil {
 		panic(err)
 	}
